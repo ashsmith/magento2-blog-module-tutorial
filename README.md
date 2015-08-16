@@ -6,3 +6,8 @@ I'm covering how to create a fully functional Magento 2 module from scratch.. ev
 
 - [Introduction](https://www.ashsmith.io/magento2/module-from-scratch-introduction/)
 - [Module Setup](https://www.ashsmith.io/magento2/module-from-scratch-module-part-1-setup/)
+- [Models & Resource Models](https://www.ashsmith.io/magento2/module-from-scratch-module-part-2-models/)
+- Migrations & Database Schema - Coming soon!
+- Frontend: Controllers, Blocks & Templates
+- Backend: Controllers, Blocks, UI & Templates
+- Unit Testing
