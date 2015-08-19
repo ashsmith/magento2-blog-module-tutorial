@@ -3,7 +3,6 @@ namespace Ashsmith\Blog\Block;
 
 use Ashsmith\Blog\Api\Data\PostInterface;
 use Ashsmith\Blog\Model\Resource\Post\Collection as PostCollection;
-use Magento\Framework\ObjectManagerInterface;
 
 class PostList extends \Magento\Framework\View\Element\Template implements
     \Magento\Framework\Object\IdentityInterface
@@ -14,13 +13,11 @@ class PostList extends \Magento\Framework\View\Element\Template implements
      *
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Ashsmith\Blog\Model\Resource\Post\CollectionFactory $postCollectionFactory,
-     * @param \Magento\Framework\View\Page\Config $pageConfig
      * @param array $data
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         \Ashsmith\Blog\Model\Resource\Post\CollectionFactory $postCollectionFactory,
-        ObjectManagerInterface $objectManager,
         array $data = []
     ) {
         parent::__construct($context, $data);
