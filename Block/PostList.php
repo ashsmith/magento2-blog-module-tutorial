@@ -22,7 +22,6 @@ class PostList extends \Magento\Framework\View\Element\Template implements
     ) {
         parent::__construct($context, $data);
         $this->_postCollectionFactory = $postCollectionFactory;
-        $this->_objectManager = $objectManager;
     }
 
     /**
