@@ -1,9 +1,6 @@
 <?php
 namespace Ashsmith\Blog\Block;
 
-use Ashsmith\Blog\Api\Data\PostInterface;
-use Ashsmith\Blog\Model\Resource\Post\Collection as PostCollection;
-
 class PostView extends \Magento\Framework\View\Element\Template implements
     \Magento\Framework\Object\IdentityInterface
 {

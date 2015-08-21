@@ -36,6 +36,7 @@ class PostList extends \Magento\Framework\View\Element\Template implements
         if (!$this->hasData('posts')) {
             $posts = $this->_postCollectionFactory
                 ->create()
+                ->addFieldToFilter('is_active', array('eq' => 1))
                 ->addOrder(
                     PostInterface::CREATION_TIME,
                     PostCollection::SORT_ORDER_DESC
