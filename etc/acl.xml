@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::content">
+                    <resource id="Ashsmith_Blog::blog_content" title="Blog" sortOrder="10" >
+                        <resource id="Ashsmith_Blog::post" title="Blog Posts" sortOrder="40">
+                            <resource id="Ashsmith_Blog::save" title="Save Blog Post" sortOrder="10" />
+                            <resource id="Ashsmith_Blog::post_delete" title="Delete Blog Post" sortOrder="20" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>
