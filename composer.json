@@ -2,7 +2,7 @@
     "name": "ashsmith/magento2-blog-module-example",
     "description": "A simple blog module.",
     "type": "magento2-module",
-    "version": "0.3.0-stable",
+    "version": "0.5.0-stable",
     "license": [
         "OSL-3.0",
         "AFL-3.0"

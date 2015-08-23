@@ -66,6 +66,12 @@ class Post extends \Magento\Framework\Model\Resource\Db\AbstractDb
             );
         }
 
+        if (!$this->isPostUrlKeyUnique($object)) {
+                throw new \Magento\Framework\Exception\LocalizedException(
+                    __('The post URL key is already in use.')
+                );
+        }
+
         if ($object->isObjectNew() && !$object->hasCreationTime()) {
             $object->setCreationTime($this->_date->gmtDate());
         }
@@ -93,35 +99,12 @@ class Post extends \Magento\Framework\Model\Resource\Db\AbstractDb
     }
 
     /**
-     * Retrieve select object for load object data
-     *
-     * @param string $field
-     * @param mixed $value
-     * @param \Ashsmith\Blog\Model\Post $object
-     * @return \Zend_Db_Select
-     */
-    protected function _getLoadSelect($field, $value, $object)
-    {
-        $select = parent::_getLoadSelect($field, $value, $object);
-
-        $select->where(
-            'is_active = ?',
-            1
-        )->limit(
-            1
-        );
-
-        return $select;
-    }
-
-    /**
      * Retrieve load select with filter by url_key and activity
      *
      * @param string $url_key
-     * @param int $isActive
      * @return \Magento\Framework\DB\Select
      */
-    protected function _getLoadByUrlKeySelect($url_key, $isActive = null)
+    protected function _getLoadByUrlKeySelect($url_key)
     {
         $select = $this->_getReadAdapter()->select()->from(
             ['bp' => $this->getMainTable()]
@@ -129,10 +112,6 @@ class Post extends \Magento\Framework\Model\Resource\Db\AbstractDb
             'bp.url_key = ?',
             $url_key
         );
-
-        if (!is_null($isActive)) {
-            $select->where('bp.is_active = ?', $isActive);
-        }
 
         return $select;
     }
@@ -159,6 +138,12 @@ class Post extends \Magento\Framework\Model\Resource\Db\AbstractDb
         return preg_match('/^[a-z0-9][a-z0-9_\/-]+(\.[a-z0-9_-]+)?$/', $object->getData('url_key'));
     }
 
+    protected function isPostUrlKeyUnique(\Magento\Framework\Model\AbstractModel $object)
+    {
+        $post_id = $this->checkUrlKey($object->getUrlKey());
+        return ($post_id == $object->getData('post_id')) || $post_id == null;
+    }
+
     /**
      * Check if post url key exists
      * return post id if post exists
@@ -168,7 +153,7 @@ class Post extends \Magento\Framework\Model\Resource\Db\AbstractDb
      */
     public function checkUrlKey($url_key)
     {
-        $select = $this->_getLoadByUrlKeySelect($url_key, 1);
+        $select = $this->_getLoadByUrlKeySelect($url_key);
         $select->reset(\Zend_Db_Select::COLUMNS)->columns('bp.post_id')->limit(1);
 
         return $this->_getReadAdapter()->fetchOne($select);
