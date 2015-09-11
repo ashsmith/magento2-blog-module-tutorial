@@ -5,7 +5,7 @@ use Ashsmith\Blog\Api\Data\PostInterface;
 use Ashsmith\Blog\Model\Resource\Post\Collection as PostCollection;
 
 class PostList extends \Magento\Framework\View\Element\Template implements
-    \Magento\Framework\Object\IdentityInterface
+    \Magento\Framework\DataObject\IdentityInterface
 {
 
     /**
