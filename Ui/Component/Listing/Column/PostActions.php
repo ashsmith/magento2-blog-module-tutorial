@@ -8,7 +8,6 @@ namespace Ashsmith\Blog\Ui\Component\Listing\Column;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
-use Ashsmith\Blog\Block\Adminhtml\Post\Grid\Renderer\Action\UrlBuilder;
 use Magento\Framework\UrlInterface;
 
 /**
@@ -31,7 +30,7 @@ class PostActions extends Column
     /**
      * @param ContextInterface $context
      * @param UiComponentFactory $uiComponentFactory
-     * @param UrlBuilder $actionUrlBuilder
+     * @param UrlInterface $urlBuilder
      * @param array $components
      * @param array $data
      * @param string $editUrl
