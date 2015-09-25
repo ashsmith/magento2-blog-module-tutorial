@@ -2,7 +2,7 @@
 namespace Ashsmith\Blog\Block;
 
 class PostView extends \Magento\Framework\View\Element\Template implements
-    \Magento\Framework\DataObject\IdentityInterface
+    \Magento\Framework\Object\IdentityInterface
 {
 
     /**

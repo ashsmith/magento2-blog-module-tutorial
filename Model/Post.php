@@ -1,7 +1,7 @@
 <?php namespace Ashsmith\Blog\Model;
 
 use Ashsmith\Blog\Api\Data\PostInterface;
-use Magento\Framework\DataObject\IdentityInterface;
+use Magento\Framework\Object\IdentityInterface;
 
 class Post  extends \Magento\Framework\Model\AbstractModel implements PostInterface, IdentityInterface
 {
