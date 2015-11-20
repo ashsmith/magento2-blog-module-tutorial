@@ -2,7 +2,7 @@
 namespace Ashsmith\Blog\Block;
 
 use Ashsmith\Blog\Api\Data\PostInterface;
-use Ashsmith\Blog\Model\Resource\Post\Collection as PostCollection;
+use Ashsmith\Blog\Model\ResourceModel\Post\Collection as PostCollection;
 
 class PostList extends \Magento\Framework\View\Element\Template implements
     \Magento\Framework\DataObject\IdentityInterface
@@ -12,12 +12,12 @@ class PostList extends \Magento\Framework\View\Element\Template implements
      * Construct
      *
      * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \Ashsmith\Blog\Model\Resource\Post\CollectionFactory $postCollectionFactory,
+     * @param \Ashsmith\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
      * @param array $data
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
-        \Ashsmith\Blog\Model\Resource\Post\CollectionFactory $postCollectionFactory,
+        \Ashsmith\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
         array $data = []
     ) {
         parent::__construct($context, $data);
@@ -25,7 +25,7 @@ class PostList extends \Magento\Framework\View\Element\Template implements
     }
 
     /**
-     * @return \Ashsmith\Blog\Model\Resource\Post\Collection
+     * @return \Ashsmith\Blog\Model\ResourceModel\Post\Collection
      */
     public function getPosts()
     {
@@ -36,7 +36,6 @@ class PostList extends \Magento\Framework\View\Element\Template implements
         if (!$this->hasData('posts')) {
             $posts = $this->_postCollectionFactory
                 ->create()
-                ->addFieldToFilter('is_active', array('eq' => 1))
                 ->addOrder(
                     PostInterface::CREATION_TIME,
                     PostCollection::SORT_ORDER_DESC

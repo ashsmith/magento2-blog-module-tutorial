@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
         <add id="Ashsmith_Blog::blog_content" title="Blog" module="Ashsmith_Blog" sortOrder="50" parent="Magento_Backend::content" resource="Ashsmith_Blog::blog_content" />
         <add id="Ashsmith_Blog::post" title="Posts" module="Ashsmith_Blog" sortOrder="0" parent="Ashsmith_Blog::blog_content" action="blog/post" resource="Ashsmith_Blog::post"/>

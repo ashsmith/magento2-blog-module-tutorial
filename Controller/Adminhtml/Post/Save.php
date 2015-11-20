@@ -2,6 +2,7 @@
 namespace Ashsmith\Blog\Controller\Adminhtml\Post;
 
 use Magento\Backend\App\Action;
+use Magento\TestFramework\ErrorLog\Logger;
 
 class Save extends \Magento\Backend\App\Action
 {

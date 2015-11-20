@@ -1,7 +1,5 @@
 <?php namespace Ashsmith\Blog\Helper;
 
-use Ashsmith\Blog\Api\Data\PostInterface;
-use Ashsmith\Blog\Model\Resource\Post\Collection as PostCollection;
 use Magento\Framework\App\Action\Action;
 
 class Post extends \Magento\Framework\App\Helper\AbstractHelper

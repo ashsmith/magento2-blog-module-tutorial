@@ -31,9 +31,14 @@ class Post  extends \Magento\Framework\Model\AbstractModel implements PostInterf
     protected $_eventPrefix = 'blog_post';
 
     /**
+     * @var \Magento\Framework\UrlInterface
+     */
+    protected $_urlBuilder;
+
+    /**
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
-     * @param \Magento\Framework\Model\Resource\AbstractResource|null $resource
+     * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb|null $resourceCollection
      * @param \Magento\Framework\UrlInterface $urlBuilder
      * @param array $data
@@ -42,7 +47,7 @@ class Post  extends \Magento\Framework\Model\AbstractModel implements PostInterf
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
         \Magento\Framework\UrlInterface $urlBuilder,
-        \Magento\Framework\Model\Resource\AbstractResource $resource = null,
+        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = [])
     {
@@ -57,7 +62,7 @@ class Post  extends \Magento\Framework\Model\AbstractModel implements PostInterf
      */
     protected function _construct()
     {
-        $this->_init('Ashsmith\Blog\Model\Resource\Post');
+        $this->_init('Ashsmith\Blog\Model\ResourceModel\Post');
     }
 
     /**
@@ -67,9 +72,9 @@ class Post  extends \Magento\Framework\Model\AbstractModel implements PostInterf
      * @param string $url_key
      * @return int
      */
-    public function checkIdentifier($url_key)
+    public function checkUrlKey($url_key)
     {
-        return $this->_getResource()->checkIdentifier($url_key);
+        return $this->_getResource()->checkUrlKey($url_key);
     }
 
     /**
@@ -113,6 +118,20 @@ class Post  extends \Magento\Framework\Model\AbstractModel implements PostInterf
     }
 
     /**
+     * Return the desired URL of a post
+     *  eg: /blog/view/index/id/1/
+     * @TODO Move to a PostUrl model, and make use of the
+     * @TODO rewrite system, using url_key to build url.
+     * @TODO desired url: /blog/my-latest-blog-post-title
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->_urlBuilder->getUrl('blog/' . $this->getUrlKey());
+    }
+
+    /**
      * Get title
      *
      * @return string|null
@@ -150,20 +169,6 @@ class Post  extends \Magento\Framework\Model\AbstractModel implements PostInterf
     public function getUpdateTime()
     {
         return $this->getData(self::UPDATE_TIME);
-    }
-
-    /**
-     * Return the desired URL of a post
-     *  eg: /blog/view/index/id/1/
-     * @TODO Move to a PostUrl model, and make use of the
-     * @TODO rewrite system, using url_key to build url.
-     * @TODO desired url: /blog/my-latest-blog-post-title
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->_urlBuilder->getUrl('blog/view/index', array('id' => $this->getId()));
     }
 
     /**

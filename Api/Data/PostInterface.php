@@ -81,6 +81,13 @@ interface PostInterface
     public function setUrlKey($url_key);
 
     /**
+     * Return full URL including base url.
+     *
+     * @return mixed
+     */
+    public function getUrl();
+
+    /**
      * Set title
      *
      * @param string $title
@@ -115,8 +122,8 @@ interface PostInterface
     /**
      * Set is active
      *
-     * @param int|bool $is_active
+     * @param int|bool $isActive
      * @return \Ashsmith\Blog\Api\Data\PostInterface
      */
-    public function setIsActive($is_active);
+    public function setIsActive($isActive);
 }

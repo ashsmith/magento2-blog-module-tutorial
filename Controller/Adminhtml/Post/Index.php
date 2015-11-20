@@ -6,6 +6,8 @@ use Magento\Framework\View\Result\PageFactory;
 
 class Index extends \Magento\Backend\App\Action
 {
+    const ADMIN_RESOURCE = 'Ashsmith_Blog::post';
+
     /**
      * @var PageFactory
      */
@@ -21,15 +23,6 @@ class Index extends \Magento\Backend\App\Action
     ) {
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
-    }
-    /**
-     * Check the permission to run it
-     *
-     * @return bool
-     */
-    protected function _isAllowed()
-    {
-        return $this->_authorization->isAllowed('Ashsmith_Blog::post');
     }
 
     /**

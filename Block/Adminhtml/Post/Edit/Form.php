@@ -1,12 +1,8 @@
 <?php
-/**
- * Copyright © 2015 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
 namespace Ashsmith\Blog\Block\Adminhtml\Post\Edit;
 
 /**
- * Adminhtml cms block edit form
+ * Adminhtml blog post edit form
  */
 class Form extends \Magento\Backend\Block\Widget\Form\Generic
 {

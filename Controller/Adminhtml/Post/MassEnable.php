@@ -18,7 +18,7 @@ class MassEnable extends AbstractMassStatus
      *
      * @var string
      */
-    protected $collection = 'Ashsmith\Blog\Model\Resource\Post\Collection';
+    protected $collection = 'Ashsmith\Blog\Model\ResourceModel\Post\Collection';
 
     /**
      * Post model

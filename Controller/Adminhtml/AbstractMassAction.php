@@ -1,29 +1,45 @@
 <?php
-namespace Ashsmith\Blog\Controller\Adminhtml\Post;
+namespace Ashsmith\Blog\Controller\Adminhtml;
+
+use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+use Magento\Framework\Controller\ResultFactory;
 
 /**
- * Class MassDelete
+ * Class AbstractMassStatus
  */
-class MassDelete extends \Magento\Backend\App\Action
+class AbstractMassStatus extends \Magento\Backend\App\Action
 {
     /**
      * Field id
      */
-    const ID_FIELD = 'post_id';
+    const ID_FIELD = 'entity_id';
+
+    /**
+     * Redirect url
+     */
+    const REDIRECT_URL = '*/*/';
 
     /**
      * Resource collection
      *
      * @var string
      */
-    protected $collection = 'Ashsmith\Blog\Model\ResourceModel\Post\Collection';
+    protected $collection = 'Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection';
 
     /**
-     * Page model
+     * Model
      *
      * @var string
      */
-    protected $model = 'Ashsmith\Blog\Model\Post';
+    protected $model = 'Magento\Framework\Model\AbstractModel';
+
+
+    /**
+     * Item status
+     *
+     * @var bool
+     */
+    protected $status = true;
     /**
      * Execute action
      *
@@ -34,16 +50,15 @@ class MassDelete extends \Magento\Backend\App\Action
     {
         $selected = $this->getRequest()->getParam('selected');
         $excluded = $this->getRequest()->getParam('excluded');
-
         try {
             if (isset($excluded)) {
                 if (!empty($excluded)) {
-                    $this->excludedDelete($excluded);
+                    $this->excludedSetStatus($excluded);
                 } else {
-                    $this->deleteAll();
+                    $this->setStatusAll();
                 }
             } elseif (!empty($selected)) {
-                $this->selectedDelete($selected);
+                $this->selectedSetStatus($selected);
             } else {
                 $this->messageManager->addError(__('Please select item(s).'));
             }
@@ -57,76 +72,62 @@ class MassDelete extends \Magento\Backend\App\Action
     }
 
     /**
-     * Delete all
+     * Set status to all
      *
      * @return void
      * @throws \Exception
      */
-    protected function deleteAll()
+    protected function setStatusAll()
     {
         /** @var AbstractCollection $collection */
         $collection = $this->_objectManager->get($this->collection);
-        $this->setSuccessMessage($this->delete($collection));
+        $this->setStatus($collection);
     }
 
     /**
-     * Delete all but the not selected
+     * Set status to all but the not selected
      *
      * @param array $excluded
      * @return void
      * @throws \Exception
      */
-    protected function excludedDelete(array $excluded)
+    protected function excludedSetStatus(array $excluded)
     {
         /** @var AbstractCollection $collection */
         $collection = $this->_objectManager->get($this->collection);
         $collection->addFieldToFilter(static::ID_FIELD, ['nin' => $excluded]);
-        $this->setSuccessMessage($this->delete($collection));
+        $this->setStatus($collection);
     }
 
     /**
-     * Delete selected items
+     * Set status to selected items
      *
      * @param array $selected
      * @return void
      * @throws \Exception
      */
-    protected function selectedDelete(array $selected)
+    protected function selectedSetStatus(array $selected)
     {
         /** @var AbstractCollection $collection */
         $collection = $this->_objectManager->get($this->collection);
         $collection->addFieldToFilter(static::ID_FIELD, ['in' => $selected]);
-        $this->setSuccessMessage($this->delete($collection));
+        $this->setStatus($collection);
     }
 
     /**
-     * Delete collection items
+     * Set status to collection items
      *
      * @param AbstractCollection $collection
-     * @return int
+     * @return void
      */
-    protected function delete(AbstractCollection $collection)
+    protected function setStatus(AbstractCollection $collection)
     {
-        $count = 0;
         foreach ($collection->getAllIds() as $id) {
             /** @var \Magento\Framework\Model\AbstractModel $model */
             $model = $this->_objectManager->get($this->model);
             $model->load($id);
-            $model->delete();
-            ++$count;
+            $model->setIsActive($this->status);
+            $model->save();
         }
-
-        return $count;
-    }
-
-    /**
-     * Set error messages
-     *
-     * @param int $count
-     * @return void
-     */
-    protected function setSuccessMessage($count)
-    {
-        $this->messageManager->addSuccess(__('A total of %1 record(s) have been deleted.', $count));
     }
 }
