@@ -6,7 +6,6 @@ use Magento\Framework\View\Result\PageFactory;
 
 class Index extends \Magento\Backend\App\Action
 {
-    const ADMIN_RESOURCE = 'Ashsmith_Blog::post';
 
     /**
      * @var PageFactory
@@ -41,4 +40,16 @@ class Index extends \Magento\Backend\App\Action
 
         return $resultPage;
     }
+
+    /**
+     * Is the user allowed to view the blog post grid.
+     *
+     * @return bool
+     */
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('Ashsmith_Blog::post');
+    }
+
+
 }
