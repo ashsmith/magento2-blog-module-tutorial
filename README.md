@@ -10,7 +10,7 @@ I'm covering how to create a fully functional Magento 2 module from scratch.. ev
 - 0.3.0 - [Migrations & Database Schema](http://www.ashsmith.io/magento2/module-from-scratch-part-3-database-tables/)
 - 0.4.2 - [Frontend: Controllers, Blocks & Templates](https://www.ashsmith.io/magento2/module-from-scratch-part-4-the-frontend/)
 - 0.5.0 - [Backend: Controllers, Blocks, UI & Templates](https://www.ashsmith.io/magento2/module-from-scratch-part-5-adminhtml/)
-- Unit Testing
+- 0.6.0 - [Unit Testing](https://www.ashsmith.io/magento2/module-from-scratch-part-6-unit-testing/)
 
 
 ## Install with Composer as you go
