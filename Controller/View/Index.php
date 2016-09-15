@@ -5,8 +5,8 @@ use \Magento\Framework\App\Action\Action;
 
 class Index extends Action
 {
-    /** @var  \Magento\Framework\View\Result\Page */
-    protected $resultPageFactory;
+    /** @var \Magento\Framework\Controller\Result\ForwardFactory */
+    protected $resultForwardFactory;
 
     /**
      * @param \Magento\Framework\App\Action\Context $context
