@@ -21,6 +21,13 @@ class MassDisable  extends \Magento\Backend\App\Action
      */
     protected $collectionFactory;
 
+    /**
+     * {@inheritdoc}
+     */
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('Ashsmith_Blog::post');
+    }
 
     /**
      * @param Context $context
