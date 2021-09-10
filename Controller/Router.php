@@ -77,6 +77,10 @@ class Router implements \Magento\Framework\App\RouterInterface
      */
     public function match(\Magento\Framework\App\RequestInterface $request)
     {
+        if ($request->getModuleName() === 'blog') {
+            return;
+        }
+
         $url_key = trim($request->getPathInfo(), '/blog/');
         $url_key = rtrim($url_key, '/');
 
