@@ -110,6 +110,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 'label' => __('Content'),
                 'title' => __('Content'),
                 'style' => 'height:36em',
+                'wysiwyg' => true,
                 'required' => true
             ]
         );
